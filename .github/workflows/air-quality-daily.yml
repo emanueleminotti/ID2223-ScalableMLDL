@@ -36,13 +36,24 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: execute python workflows from bash script
+      - name: execute notebooks (Radhuset)
         env:
-          HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
+          AQICN_STREET:      ${{ secrets.AQICN_STREET_RADHUSET }}
+          AQICN_URL:         ${{ secrets.AQICN_URL_RADHUSET }}
         run: |
           cd notebooks/airquality
           jupyter nbconvert --to notebook --execute 2_air_quality_feature_pipeline.ipynb
           jupyter nbconvert --to notebook --execute 4_air_quality_batch_inference.ipynb
+
+      - name: execute notebooks (Dalaplan)
+        env:
+          AQICN_STREET:      ${{ secrets.AQICN_STREET_DALAPLAN }}
+          AQICN_URL:         ${{ secrets.AQICN_URL_DALAPLAN }}
+        run: |
+          cd notebooks/airquality
+          jupyter nbconvert --to notebook --execute 2_air_quality_feature_pipeline.ipynb
+          jupyter nbconvert --to notebook --execute 4_air_quality_batch_inference.ipynb
+
 
       - name: github pages publish
         uses: stefanzweifel/git-auto-commit-action@v5
