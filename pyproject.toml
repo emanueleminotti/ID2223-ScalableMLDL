@@ -28,8 +28,8 @@ dependencies = [
     "nbformat",
     "Faker",
     "matplotlib==3.8.3",
-    "folium>=0.20.0",
-    "streamlit-folium>=0.25.3",
+    "folium==0.14.0",
+    "streamlit-folium==0.20.0"
 ]
 
 #getpass4==0.0.14.1
