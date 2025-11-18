@@ -16,6 +16,7 @@ The goal of the lab is to build a complete end-to-end pipeline that ingests weat
 This project is part of the course **ID2223: Scalable Machine Learning Systems**, following the workflow from the book *Building ML Systems with a Feature Store*.
 
 The dashboard is reachable through the link: https://id2223-scalablemldl-dgeyrhuarorujpfkdynbp7.streamlit.app
+
 ---
 
 ## Features
