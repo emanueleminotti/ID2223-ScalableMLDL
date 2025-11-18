@@ -74,7 +74,7 @@ m = folium.Map(location=[55.603, 13.003], zoom_start=13, tiles="CartoDB Positron
 for s in SENSORS:
     popup = folium.Popup(popup_html(s["name"], s["key"]), max_width=500, parse_html=False)
     folium.CircleMarker(
-        location=[s["lat"], s["lon']],
+        location=[s["lat"], s["lon"]],
         radius=9,
         weight=2,
         color="#111",
