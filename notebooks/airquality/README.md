@@ -1,34 +1,128 @@
-## Predict Air Quality
+# Air Quality Prediction Service with LLM Personalization  
+**ID2223 – Lab 1 (HT2025)**  
+*Predictive Air Quality Modeling with Feature Stores and Serverless Pipelines*
 
-This project builds an Air Quality Forecasting Service for an Air Quality sensor available at https://waqi.info/.
+---
+
+## Overview
+
+This project implements a **serverless machine learning system** that predicts **PM2.5 air quality levels** for two air quality sensors in **Malmö, Sweden**:
+
+- **Rådhuset**
+- **Dalaplan**
+
+The goal of the lab is to build a complete end-to-end pipeline that ingests weather and air-quality data, creates features, trains a predictive model, runs batch inference, and exposes predictions through a simple dashboard.  
+We also extend the system with **LLM capabilities**, enabling users to ask natural-language questions about historical and forecasted air quality for their location.
+
+This project is part of the course **ID2223: Scalable Machine Learning Systems**, following the workflow from the book *Building ML Systems with a Feature Store*.
+
+---
+
+## Features
+
+### ✅ Air Quality Forecasting  
+We forecast PM2.5 values for the next **7–10 days** using a model trained on:
+
+- Historical PM2.5 measurements  
+- Historical and forecasted weather data  
+- Sensor-specific contextual features  
+
+### ✅ Two Malmö Sensors Implemented  
+We implemented the full pipeline for two AQI sensors:
+
+- **Malmö – Rådhuset**
+- **Malmö – Dalaplan**
+
+These sensors were selected because they provide **high-quality historical data** on https://aqicn.org.
+
+### ✅ LLM-Powered Personalization  
+The system augments the prediction interface with LLM reasoning.  
+For each query, the system injects:
+
+- User location  
+- Current date  
+- Predicted PM2.5 values  
+- Historical measurements from the Feature Store  
+- (Future) Health sensitivity profile  
+
+Users can ask natural-language questions such as:
+
+> “How will the air quality change this week at Rådhuset?”  
+> “Was the PM2.5 higher last weekend than today at Dalaplan?”
+
+### ✅ Reproducible Serverless ML Pipelines  
+Using **Hopsworks**, **GitHub Actions**, and **Jupyter notebooks**, we implemented:
+
+1. **Backfill feature pipeline**  
+   Loads >1 year of historical weather and air-quality data and writes them to feature groups.
+
+2. **Daily feature pipeline**  
+   Updates the Feature Store with yesterday’s observations and next-week forecasts.
+
+3. **Training pipeline**  
+   Creates a Feature View, trains an XGBoost regression model, and registers it in Hopsworks.
+
+4. **Batch inference pipeline**  
+   Downloads the latest model, generates predictions, and creates the dashboard PNG.
+
+### ✅ Dashboard Visualization  
+We provide a dashboard that visualizes:
+
+- 7-day PM2.5 forecast  
+- Historical data (hindcast)  
+- Comparison of predicted vs real measurements  
+
+The dashboard is publicly accessible as required.
+
+---
 
 
-The output is a forecast for air quality, like this one:
+---
 
-![Air quality Prediction](https://featurestorebook.github.io/mlfs-book/air-quality/assets/img/pm25_forecast.png)
+## How to Run the Project
 
+### 1. Create Accounts
+- **Hopsworks.ai** (Feature Store)
+- **GitHub** (GitHub Actions for serverless scheduling)
 
-## Personalized Air Quality Predictions with a LLM
+### 2. Add Secrets
+Store `HOPSWORKS_API_KEY` in:
 
-This air quality forecasting service has been augmented with LLM capabilities. You can ask it both future (forecasting) and historical questions about air quality at your location via a microphone or text input dialog.
+- GitHub → Settings → Secrets → Actions
 
-We augment the prompt with:
- * your location,
- * today’s date,
- * predicted air quality (from a ML model),
- * historical air quality (from the feature store),
- * are you in a sensitive group (coming soon).
+### 3. Run the Pipelines
+You can run all pipelines locally from Jupyter, or schedule them using GitHub Actions.
 
+### 4. View Dashboard
+The batch inference pipeline generates a forecast PNG for both Rådhuset and Dalaplan.
 
-![Personalized Air Quality with LLMs Architecture](personalized-air-quality-with-llms.png)
+---
 
+## Deliverables
 
-## Application Architecture
+✔ Source code in GitHub repository  
+✔ README.md (this document)  
+✔ Public dashboard URL  
+✔ Implementation of forecasting for **Rådhuset** and **Dalaplan** sensors  
+✔ All pipelines completed as per lab requirements  
 
-![Application Architecture Air Quality with LLMs Architecture](app-air-quality-with-llms.png)
+---
 
+## References
 
-## Tutorial Instructions
+- *Building ML Systems with a Feature Store*  
+  https://github.com/featurestorebook/mlfs-book  
 
-You can find [instructions for running this tutorial in this Google Doc](https://docs.google.com/document/d/1YXfM1_rpo1-jM-lYyb1HpbV9EJPN6i1u6h2rhdPduNE/edit?usp=sharing).
+- AQI Sensor Data  
+  https://aqicn.org  
+
+- Weather Forecast Data  
+  https://open-meteo.com  
+
+---
+
+## Authors
+
+Group project for ID2223 – HT2025  
+KTH Royal Institute of Technology  
 
