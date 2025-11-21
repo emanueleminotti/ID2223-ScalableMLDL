@@ -11,7 +11,7 @@ from streamlit_folium import st_folium
 st.set_page_config(page_title="Air Quality – Malmö", page_icon="🗺️", layout="wide")
 st.title("🗺️ Air Quality Forecast – Malmö")
 st.markdown(
-    "Click a sensor on the map to view **PM2.5 forecast** and the 1-day **hindcast (predicted vs actual)**."
+    "Click a sensor on the map to view **PM2.5 forecast** ."
 )
 
 # ---------------- PATH DISCOVERY (robusto) ----------------
@@ -106,28 +106,15 @@ with row1_col1:
     st.image(str(f_path), caption=f"PM2.5 Forecast – {chosen['name']}")
 
 with row1_col2:
-    st.markdown("**🔄 Short-term hindcast (1-day, predicted vs actual)**")
-    st.image(
-        str(h_path),
-        caption=f"1-day Hindcast (recent forecast performance) – {chosen['name']}",
-    )
-
-# Seconda riga
-row2_col1, row2_col2 = st.columns(2, gap="large")
-
-with row2_col1:
     st.markdown("**📉 Historical hindcast (last months)**")
     st.image(
         str(model_hindcast_path),
         caption=f"Historical PM2.5 Hindcast (last months) – {chosen['name']}",
     )
 
-with row2_col2:
-    st.markdown("**🧩 Feature importance**")
-    st.image(
-        str(feature_importance_path),
-        caption=f"PM2.5 Model Feature Importance – {chosen['name']}",
-    )
+# Seconda riga
+
+
 
 st.markdown(
     """
