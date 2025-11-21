@@ -11,7 +11,7 @@ from streamlit_folium import st_folium
 st.set_page_config(page_title="Air Quality – Malmö", page_icon="🗺️", layout="wide")
 st.title("🗺️ Air Quality Forecast – Malmö")
 st.markdown(
-    "Click a sensor on the map to view **PM2.5 forecast** and the 1-day **hindcast (predicted vs actual)**."
+    "Click a sensor on the map to view **PM2.5 forecast** ."
 )
 
 # ---------------- PATH DISCOVERY (robusto) ----------------
